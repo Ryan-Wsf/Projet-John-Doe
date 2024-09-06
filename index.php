@@ -8,43 +8,7 @@
     <script src="https://kit.fontawesome.com/2bb90c57b5.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header class="max-width">
-        <div>
-            <a href="/"><img src="img/Logo.png" alt="logo" width="180"></a>
-            <h1>Developpeur Web et Web Mobile</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#" class="page-active">Accueil</a></li>
-                <li><a href="/index.html">Qui suis-je ?</a></li>
-                <li><a href="/Carte.html">Ma formation</a></li>
-                <li><a href="#">Mes compétences</a></li>
-                <li><a href="/projets.html">Mes projets</a></li>
-                <li id="contactez-moi"><a href="#contact">Contactez Moi</a></li>
-                <div class="sub-menu" id="contact">
-                    <div>
-                        <div>
-                            <a href="#"><i class="fa-solid fa-xmark"></i></a>
-                        </div>
-                        <form action="#">
-                            <p>Me Contacter</p>
-                            <label for="nom">Votre nom:</label>
-                            <input type="text" name="nom" placeholder="Votre nom" required>
-                        
-                            <label for="email">Votre email:</label>
-                            <input type="email" name="email" placeholder="Votre email" required>
-                        
-                            <label for="message">Votre message:</label>
-                            <textarea name="message" placeholder="Votre message" required></textarea>
-                        
-                            <button type="submit">Envoyer la demande</button>
-                        </div>
-                    </form>
-                </div>
-            </ul>
-        </nav>
-        <i class="fa-solid fa-bars" id="burger"></i>
-    </header>
+    <?php include 'header.php'; ?>
     <main>
         <section id="section1" class="max-width">
             <article class="slide-down">
@@ -91,7 +55,7 @@
                         <h3>Formation de développement à la carte</h3>
                         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum, earum quaerat voluptates quas eos nam tempore aliquam ab consequatur provident nemo maxime praesentium libero voluptatum id nobis tenetur iste corrupti.</p>
                         <p>adipisicing elit. Illum, earum quaerat voluptates quas eos nam tempore aliquam ab adipisicing elit.</p>
-                        <a href="/Carte.html" class="button_blue">En savoir plus</a>
+                        <a href="/Carte.php" class="button_blue">En savoir plus</a>
                     </div>
                 </article>
             </div>
@@ -209,32 +173,25 @@
         <section id="section5" class="max-width">
             <div>
                 <h2>Mes Projets</h2>
-                <a href="/projets.html" class="button_blue">Voir tout les projets</a>
+                <a href="/projets.php" class="button_blue">Voir tout les projets</a>
             </div>
             <div id="div_section5">
-                <article>
-                    <img src="img/projet1.PNG" alt="img">
-                    <h3>Home Key - Intégration HTML & CSS</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, vel molestiae, at ad voluptate recusandae libero, quisquam sint beatae ab odit laborum omnis facere repellat unde ex dolorem facilis nesciunt!</p>
-                    <a href="#" class="button_blue">Lire la suite</a>
-                </article>
-                <article>
-                    <img src="img/projet2.PNG" alt="img">
-                    <h3>Vividly - Intégration Mobile First</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, vel molestiae, at ad voluptate recusandae libero, quisquam sint beatae ab odit laborum omnis facere repellat unde ex dolorem facilis nesciunt!</p>
-                    <a href="/vividly.html" class="button_blue">Lire la suite</a>
-                </article>
-                <article>
-                    <img src="img/projet3.PNG" alt="img">
-                    <h3>Portfolio de Développeur Web</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, vel molestiae, at ad voluptate recusandae libero, quisquam sint beatae ab odit laborum omnis facere repellat unde ex dolorem facilis nesciunt!</p>
-                    <a href="#" class="button_blue">Lire la suite</a>
-                </article>
+                <?php include 'tableaux.php'; ?>
+                <?php $compteur = 0; ?>
+                <?php foreach ($projets as $projet){
+                    if ($compteur < 3) { ?>
+                        <article>
+                            <img src="<?=$projet['img'] ?>" alt="img">
+                            <h3><?=$projet['title'] ?></h3>
+                            <p><?=$projet['description'] ?></p>
+                            <a href="projet.php?id=<?=$projet['id'] ?>" class="button_blue">Lire la suite</a>
+                        </article>
+                        <?php $compteur++; 
+                    }
+                } ?>
             </div>
         </section>
     </main>
-    <footer>
-        <p>Mon super site web !</p>
-    </footer>
+    <?php include 'footer.php'; ?>
 </body>
 </html>

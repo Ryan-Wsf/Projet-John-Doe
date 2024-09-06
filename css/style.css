@@ -253,6 +253,7 @@ ul{
     position: absolute;
     top: -180%;
     left: 60%;
+    z-index: 1;
 }
 
 .sub-menu:target {

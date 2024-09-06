@@ -1,3 +1,17 @@
+<?php
+$id_projet = $_GET['id'];
+
+include 'tableaux.php';
+
+$projet_actuel = null;
+foreach ($projets as $projet) {
+    if ($projet['id'] == $id_projet) {
+        $projet_actuel = $projet;
+        break;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,57 +22,20 @@
     <script src="https://kit.fontawesome.com/2bb90c57b5.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header class="max-width">
-        <div>
-            <a href="/"><img src="img/Logo.png" alt="logo" width="180"></a>
-            <h1>Developpeur Web et Web Mobile</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="/">Accueil</a></li>
-                <li><a href="/index.html">Qui suis-je ?</a></li>
-                <li><a href="/Carte.html">Ma formation</a></li>
-                <li><a href="#">Mes compétences</a></li>
-                <li><a href="/projets.html" class="page-active">Mes projets</a></li>
-                <li id="contactez-moi"><a href="#contact">Contactez Moi</a></li>
-                <div class="sub-menu" id="contact">
-                    <div>
-                        <div>
-                            <a href="#"><i class="fa-solid fa-xmark"></i></a>
-                        </div>
-                        <form action="#">
-                            <p>Me Contacter</p>
-                            <label for="nom">Votre nom:</label>
-                            <input type="text" name="nom" placeholder="Votre nom" required>
-                        
-                            <label for="email">Votre email:</label>
-                            <input type="email" name="email" placeholder="Votre email" required>
-                        
-                            <label for="message">Votre message:</label>
-                            <textarea name="message" placeholder="Votre message" required></textarea>
-                        
-                            <button type="submit">Envoyer la demande</button>
-                        </div>
-                    </form>
-                </div>
-            </ul>
-        </nav>
-        <i class="fa-solid fa-bars" id="burger"></i>
-    </header>
+    <?php include 'header.php'; ?>
     <main>
         <section id="section1">
             <div>
-                <h2>Vividly</h2>
-                <p>Intégration Mobile First</p>
+                <h2><?=$projet_actuel['shorttitle']?></h2>
+                <p><?=$projet_actuel['type']?></p>
             </div>
         </section>
         <section id="section2">
             <div>
-                <h2>Projet Vividly</h2>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia cum totam iure. Dicta placeat quidem fugiat velit, quia necessitatibus quasi dignissimos accusantium exercitationem ipsa beatae consequuntur illo reprehenderit, qui eveniet.</p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia id quae autem. Excepturi, sunt placeat laudantium nesciunt quae adipisci dicta magni illum aperiam qui! Mollitia nostrum odit animi quis voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem dolorum molestiae a iste eius vitae deserunt enim tenetur minima. Reiciendis ratione aperiam eligendi pariatur corporis debitis asperiores ad expedita possimus?</p>
+                <h2><?=$projet_actuel['shorttitle']?></h2>
+                <p><?=$projet_actuel['description']?></p>
             </div>
-            <img src="/img/projet2.PNG" alt="img">
+            <img src="<?=$projet_actuel['img']?>" alt="img">
         </section>
         <section id="section3" class="max-width">
             <h2>Les compétences développées</h2>
@@ -158,30 +135,24 @@
         <section id="section4" class="max-width">
             <h2>Les projets réalisés</h2>
             <div id="div_section4">
-                <article>
-                    <img src="img/projet1.PNG" alt="img">
-                    <h3>Home Key - Intégration HTML & CSS</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, vel molestiae, at ad voluptate recusandae libero, quisquam sint beatae ab odit laborum omnis facere repellat unde ex dolorem facilis nesciunt!</p>
-                    <a href="#" class="button_blue">Lire la suite</a>
-                </article>
-                <article>
-                    <img src="img/projet2.PNG" alt="img">
-                    <h3>Vividly - Intégration Mobile First</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, vel molestiae, at ad voluptate recusandae libero, quisquam sint beatae ab odit laborum omnis facere repellat unde ex dolorem facilis nesciunt!</p>
-                    <a href="/vividly.html" class="button_blue">Lire la suite</a>
-                </article>
-                <article>
-                    <img src="img/projet3.PNG" alt="img">
-                    <h3>Portfolio de Développeur Web</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, vel molestiae, at ad voluptate recusandae libero, quisquam sint beatae ab odit laborum omnis facere repellat unde ex dolorem facilis nesciunt!</p>
-                    <a href="/index.html" class="button_blue">Lire la suite</a>
-                </article>
+                <?php $compteur = 0; ?>
+                <?php foreach ($projets as $projet){
+                    if ($compteur < 3) { ?>
+                        <article>
+                            <img src="<?=$projet['img'] ?>" alt="img">
+                            <h3><?=$projet['title'] ?></h3>
+                            <p><?=$projet['description'] ?></p>
+                            <a href="projet.php?id=<?=$projet['id']?>" class="button_blue">Lire la suite</a>
+                        </article>
+                        <?php $compteur++; 
+                    }
+                } ?>
             </div>
             <div id="plus_projets">
-                <a href="/projets.html" class="button_blue">Voir plus de projets</a>
+                <a href="../projets.php" class="button_blue">Voir plus de projets</a>
             </div>
         </section>
     </main>
-    <footer>
-        <p>Mon super site web !</p>
-    </footer>
+    <?php include 'footer.php'; ?>
+</body>
+</html>
